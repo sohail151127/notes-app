@@ -1,0 +1,128 @@
+ /* css for updatedHeader  */
+
+ .back__arrow1{
+    background-color: rgb(197, 112, 8);
+}
+.back__arrow2{
+    background-color: rgb(197, 112, 8);
+}
+.back__arrow3{
+    background-color: rgb(197, 112, 8);
+    padding-top: 1%;
+}
+
+.back__arrow3__4{
+    background-color: rgb(197, 112, 8);
+}
+
+.back__arrow4{
+    background-color: rgb(197, 112, 8);
+    color: #ffffff;
+    font-size: x-large;
+}
+
+.header{
+    background-color: rgb(197, 112, 8);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.header__1{
+    background-color: rgb(197, 112, 8);
+}
+
+.header3{
+    background-color: rgb(197, 112, 8);
+    padding-top: 1%;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.header4{
+    background-color: rgb(197, 112, 8);
+    padding-top: 10%;
+}
+
+.dots__icon{
+    background-color: rgb(197, 112, 8);
+    padding-bottom: 1%;
+    
+}
+
+.dot__background{
+    background-color: rgb(197, 112, 8);
+    font-size: x-large;
+    border: none;
+    
+}
+
+.dot{
+    background-color: rgb(197, 112, 8);
+    color: #ffffff;
+}
+
+/* ...................... */
+
+/* enterTitle.css */
+
+.container__title{
+    margin-top: 2%;
+    padding: 0%;
+}
+.row__title{
+    background-color: white;
+    margin: 0%;
+    padding: 0%;
+    border-radius: 5px;
+    
+}
+.col__title{
+    background-color: white;
+    margin: 0%;
+    padding: 0%;
+    border-radius: 5px;
+    
+    
+}
+.input__title{
+    background-color: white;
+    width: 100%;
+    padding: 2% 2%;
+    border: none;
+    border-radius: 5px;
+    
+}
+
+/* ......................... */
+/* Sum part */
+
+.sum{
+    margin-top: 3%; 
+}
+
+/* .................. */
+
+
+/* ................. */
+/* footer.css */
+
+.plus__footer{
+    
+    font-size: xx-large;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+}
+
+.plus__button{
+      border: none;
+}
+
+.plus{
+    color: white;
+    background-color: rgb(197, 112, 8);
+    border-radius: 20px;
+    padding: 15%;
+}
+
+/* .............. */

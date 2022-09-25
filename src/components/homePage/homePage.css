@@ -1,0 +1,126 @@
+/* home page header css */
+
+.header{
+    background-color: rgb(197, 112, 8);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.header__1{
+    background-color: rgb(197, 112, 8);
+}
+
+.header3{
+    background-color: rgb(197, 112, 8);
+}
+
+
+.dots__icon{
+    background-color: rgb(197, 112, 8);
+    
+}
+
+.dot__background{
+    background-color: rgb(197, 112, 8);
+    font-size: x-large;
+    border: none;
+}
+
+.dot{
+    background-color: rgb(197, 112, 8);
+    color: #ffffff;
+    
+}
+
+/* ....................... */
+/* home page search bar css */
+
+.border__searchBar{
+    border: 5px solid white;
+    margin-top: 5%;
+    border-radius: 25px;
+    background-color: white;
+    padding-left: 0%;
+    padding-right: 0%;
+    
+  }
+  
+  
+  .input{
+    border: none;
+    width: 80%;
+    background-color: white;
+    font-size: medium;
+    margin: 0%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border-radius: 25px;
+  }
+  
+  .button{
+    color: rgb(138, 132, 132);
+    background-color: white;
+    border: none;
+    width: 20%;
+    padding-top: 1.8%;
+    padding-bottom: 1.5%;
+    border-radius: 10px;
+    
+  }
+  
+  .searchIcon__background{
+    background-color: white;
+    font-size: x-large;
+  }
+  
+/* ....................   */
+/* home page below search bar saved data */
+
+
+.box_1_1{
+    justify-content: space-around;
+    
+  }
+
+  .box1{
+    margin-top: 2%;
+  }
+
+  .bg{
+    background-color: white;
+    border-radius: 6px;
+  }
+  .box3{
+    font-weight: bold;
+  }
+  
+  .box5{
+    background-color: white;
+   border: none;
+  }
+  .box6{
+    font-weight: bolder; 
+  }
+
+  /* ..................... */
+  /* home page footer css */
+  .plus__footer{
+    
+    font-size: xx-large;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+}
+
+.plus__button{
+      border: none;
+}
+
+.plus{
+    color: white;
+    background-color: rgb(197, 112, 8);
+    border-radius: 20px;
+    padding: 15%;
+}
+
+/* .................... */
