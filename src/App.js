@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UpdateNotes from './components/updateNotes/UpdateNotes';
 import HomePage from './components/homePage/HomePage';
@@ -9,26 +9,32 @@ import {
   Route,
 } from "react-router-dom";
 
-const App = () => {
-  
 
-  const receiveData=( )=>{
- 
+const App = () => {
+  const [gotData, setGotData] = useState("")
+
+  const receiveData=( addItem)=>{
+    // console.log(addItem)
+    setGotData(addItem)
   }
   
+  // console.log(gotData)
 
+  
   return (
     <>
 {/* sohail"/HomePage" */}
     <Routes>
       <Route index element={<HomePage />} />
+
       <Route path="/HomePage" index element={
-      <HomePage addItem={receiveData} />} />
+      <HomePage gotData={gotData}  />
+      } />
+
       <Route path="/UpdateNotes" element={
-      <UpdateNotes receiveUpdateNotesData={receiveData} />
+      <UpdateNotes receiveUpdateNotesData={receiveData}/>
       } />
     </Routes>
-    
     </>
   )
 }

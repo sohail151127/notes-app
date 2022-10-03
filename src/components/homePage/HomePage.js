@@ -9,11 +9,17 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { FiPlus } from 'react-icons/fi';
+import AddLines from '../homePage/addLines/AddLines';
 
 const HomePage = (props) => {
 
-  // let data = props.dataa
-  // console.log(data)
+  let gotData = [props.gotData]
+  // console.log(gotData)
+
+  const plusButtonH=()=>{
+    // console.log("sohail")
+  }
+  
 
   return (
     <>
@@ -26,7 +32,7 @@ const HomePage = (props) => {
 
              <Col xs={{span:4, offset:4}} className='dots__icon'>
                 <button type="submit" className='dot__background'><BiDotsVerticalRounded className='dot' /></button>
-                <Link to="/UpdateNotes">Update</Link>
+                
              </Col>
         </Row>
     </Container>
@@ -48,36 +54,34 @@ const HomePage = (props) => {
 
     <Container className='box bg' >
         <Row className="box_1_1">   
-   {/* iterate from here for new box */}
 
-          <Col xs={5} className="box1 bg">
-            <Row className="box2 bg">
-            <Col xs={8} className="box3 bg"> gha </Col>
-            <Col xs={{span:3, offset:1}} className="box4 bg"> 
-            <button type="submit" className='box5'><BsThreeDotsVertical className="box6 bg" /></button>  
-            </Col>
-    {/* iterate from here for new checkbox lines */}
-             <Col xs={2} className="box7 bg"> <input className="box bg" type="checkbox" name="" id="1" />  </Col>
-             <Col xs={6} className="box8 bg"> gaja </Col>   
-             <Col xs={4} className="box9 bg"> 50 </Col>
-              
-            </Row>
-          </Col>
+        {/* iterate from here for new box */}
 
-          
-          <Col xs={5} className="box1 bg">
-            <Row className="box2 bg">
-            <Col xs={8} className="box3 bg"> gha </Col>
-            <Col xs={{span:3, offset:1}} className="box4 bg"> 
-            <button type="submit" className='box5'><BsThreeDotsVertical className="box6 bg" /></button>  
-            </Col>
-             <Col xs={2} className="box7 bg"> <input className="box bg" type="checkbox" name="" id="1" />  </Col>
-             <Col xs={6} className="box8 bg"> gaja </Col>   
-             <Col xs={4} className="box9 bg"> 50 </Col> 
-            </Row>
-          </Col>
-         
-           
+   {
+    gotData.map((x,i)=>{
+      return   <Col key={i} id={i} xs={5} className="box1 bg">
+                  <Row className="box2 bg">
+                  <Col xs={8} className="box3 bg"> {x[i].title} </Col>
+                  <Col xs={{span:3, offset:1}} className="box4 bg"> 
+                  <button type="submit" className='box5'><BsThreeDotsVertical className="box6 bg" /></button>  
+                  </Col>
+        {/* iterate from here for new checkbox lines */}
+            {x.map((y,j)=>{
+              return <AddLines 
+              key={j}
+              id ={j}
+              // title={y.title}
+              content={y.content}
+              amount={y.amount}
+              // deleteItem= {onDelete}
+              />
+            })}
+    
+      </Row>
+    </Col>
+
+    })
+   }
 
         </Row>
     </Container>
@@ -85,9 +89,13 @@ const HomePage = (props) => {
 {/* home page footer plus sighn for adding new data */}
 
   <footer className='plus__footer'>
-      <button type='submit' className='plus__button'>
+      <Link to="/UpdateNotes"
+      onClick={plusButtonH}
+      type='submit' 
+      className='plus__button'
+      >
       <FiPlus className='plus' />
-      </button>
+      </Link>
     </footer>
 {/* ...............................   */}
 

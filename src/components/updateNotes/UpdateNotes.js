@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { TiTick } from 'react-icons/ti';
 import { BiArrowBack } from 'react-icons/bi';
 import "./updateNotes.css";
 import { IoCloseSharp } from 'react-icons/io5';
@@ -15,7 +14,6 @@ import Note from "../note/Note.js";
 // here i'm getting data from localStorage
 const getlocalAddItem =()=>{
   let list = localStorage.getItem("lists")
-  // console.log(list)
 
   if(list){
     return JSON.parse(localStorage.getItem("lists")) 
@@ -29,7 +27,8 @@ const UpdateNotes = (props) => {
 
   const [addItem, setAddItem] = useState(
     getlocalAddItem
-  )
+  ) 
+ 
   const [note, setNotes] = useState(
     {
       title: "",
@@ -38,14 +37,12 @@ const UpdateNotes = (props) => {
     }
   )
 
-  
   const InputEvent =(e)=>{
 
     // const value = e.target.value;
     // const name = e.target.name;
 
-    // upper code is normal lower code is 
-    // destructuring
+    // above code is normal and the code below is destructured
 
     const {name, value} = e.target;
 
@@ -55,28 +52,19 @@ const UpdateNotes = (props) => {
         [name] : value,
       } 
     })
-    // console.log(note);
   }
 
   const addEvent =()=>{
     setAddItem((prevData)=>{
-
-      console.log(prevData)
-      console.log(note)
-
       return [...prevData, note]
-
     });
     setNotes({
-      // title: "",
+      title: "",
       content: "",
       amount: ""
-    })    
-    
-  }
+    })}
 
     const onDelete =(id)=>{
-
       setAddItem((oldData)=>{
         return oldData.filter((i,j)=>{
           return j !== id;  
@@ -89,31 +77,19 @@ const UpdateNotes = (props) => {
     let store= addItem.map((x, i)=>{
       return  Number(x.amount)
     })
-
     let sum = store.reduce((a,b)=>a+b, 0)
-    // console.log(sum)
     // ...................................
 
-    const doneHandler =()=>{
-      // let oneNote= addItem.map((v,i)=> v)
-
-      // console.log("clicked");
-      // console.log(oneNote);
-      // localStorage.setItem("Title", val.title);
-      // localStorage.setItem("Notes", val.content);
-      // localStorage.setItem("Amount", val.amount);
-
-    }
 
     // add data to localStorage
     useEffect(() => {
     localStorage.setItem("lists",JSON.stringify(addItem))
-
     }, [addItem]);
 
-
-    // console.log(addItem)
-    // props.receiveUpdateNotesData(addItem)
+     // sending data to parent component App.js
+     useEffect(() => {
+      props.receiveUpdateNotesData(addItem)
+     })
     
 
   return (
@@ -126,19 +102,9 @@ const UpdateNotes = (props) => {
             <Link className='back__arrow3__4' to="/HomePage"><BiArrowBack className='back__arrow4' /></Link>
              </Col>  
 
-            <Col xs={9} className='header3'>
+            <Col xs={11} className='header3'>
                 Update Notes
             </Col>
-
-             <Col xs={2} className='dots__icon'>
-                <button 
-                type="submit" 
-                onClick={doneHandler} 
-                className='dot__background'
-                >
-                <TiTick className='dot' />
-                </button>
-             </Col>
         </Row>
     </Container>
 
@@ -240,8 +206,7 @@ const UpdateNotes = (props) => {
       className='plus__button'>
       <FiPlus className='plus' />
       </button>
-    </footer>
-    
+    </footer>    
     </>
   )
 }
