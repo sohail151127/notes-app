@@ -1,25 +1,48 @@
-import React from 'react'
-
+import React, { useState } from 'react'
 import "./homePage.css"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
-import { BsThreeDotsVertical } from 'react-icons/bs';
+// import { BsThreeDotsVertical } from 'react-icons/bs';
 import { FiPlus } from 'react-icons/fi';
-import AddLines from '../homePage/addLines/AddLines';
+// import AddLines from '../homePage/addLines/AddLines';
+import ListItem from './listItem/ListItem';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import "bootstrap/dist/css/bootstrap.min.css";
 
-const HomePage = (props) => {
+const HomePage = ( ) => {
+  const navigate=useNavigate()
+  const [query, setQuery] = useState("")
 
-  let gotData = [props.gotData]
-  // console.log(gotData)
+  //Removing "lists" key from localStorage
+  localStorage.removeItem("lists")
 
-  const plusButtonH=()=>{
-    // console.log("sohail")
+  //Getting "array of keys" from localStorage
+  var arrayOfKeys = []
+    for (var i=0; i< localStorage.length; i++) {
+      var key = localStorage.key(i);
+      // var value = localStorage[key];
+      arrayOfKeys.push(key)
   }
-  
+  // console.log("old:",arrayOfKeys)
+
+  // Now I'm removing "isChecked" key from arrayOfKeys
+  let filteredArrayOfKeys = arrayOfKeys.filter(x => x !== "isChecked")
+  // console.log("new:",filteredArrayOfKeys)
+
+  //Corresponding values of each Key from localStorage
+  let data2 = filteredArrayOfKeys.map((x)=>{
+    return (JSON.parse(localStorage.getItem(x)))
+  })
+  // console.log("keyValues",data2)
+
+ const deleteAll=()=>{
+  localStorage.clear()
+  navigate("/")
+ }
 
   return (
     <>
@@ -31,9 +54,22 @@ const HomePage = (props) => {
              </Col>
 
              <Col xs={{span:4, offset:4}} className='dots__icon'>
-                <button type="submit" className='dot__background'><BiDotsVerticalRounded className='dot' /></button>
-                
-             </Col>
+             
+                <NavDropdown 
+                  title={<button className='header__button__dot'><BiDotsVerticalRounded className='dot' /></button>} 
+                  id="basic-nav-dropdown" 
+                  className="navDrop">
+
+                  <NavDropdown.Item 
+                    onClick={deleteAll}
+                    
+                    className='navItem'>
+                      Delete all notes
+                  </NavDropdown.Item>
+
+                </NavDropdown>
+              
+            </Col>
         </Row>
     </Container>
 
@@ -43,54 +79,37 @@ const HomePage = (props) => {
     <Row>        
         <Col md={12} className="border__searchBar">
             
-            <input type="text" placeholder='Search' className='input'/>
+            <input onChange={(e)=>setQuery(e.target.value)} value={query} type="text" placeholder='Search' className='input'/>
 
             <button type='submit' className='button'><AiOutlineSearch className='searchIcon__background'/></button>
         </Col>
     </Row>
     </Container> 
 
-    {/* home page below search bar saved data  */}
-
-    <Container className='box bg' >
-        <Row className="box_1_1">   
-
-        {/* iterate from here for new box */}
-
+    {/* home page below search bar saved data  */}  
+    <Container fluid>
+      <Row className="main__row">     
    {
-    gotData.map((x,i)=>{
-      return   <Col key={i} id={i} xs={5} className="box1 bg">
-                  <Row className="box2 bg">
-                  <Col xs={8} className="box3 bg"> {x[i].title} </Col>
-                  <Col xs={{span:3, offset:1}} className="box4 bg"> 
-                  <button type="submit" className='box5'><BsThreeDotsVertical className="box6 bg" /></button>  
-                  </Col>
-        {/* iterate from here for new checkbox lines */}
-            {x.map((y,j)=>{
-              return <AddLines 
-              key={j}
-              id ={j}
-              // title={y.title}
-              content={y.content}
-              amount={y.amount}
-              // deleteItem= {onDelete}
-              />
-            })}
-    
-      </Row>
-    </Col>
-
+    data2.filter((a,i)=>a[1].DATA.some(d=>d.title.toLowerCase().includes(query.toLocaleLowerCase())) ||
+    a[1].DATA.some(d=>d.content.toLowerCase().includes(query.toLocaleLowerCase())) ||
+    a[1].DATA.some(d=>d.amount.toLowerCase().includes(query.toLocaleLowerCase()))
+    ).map((x,i)=>{
+      return <ListItem 
+              x={x}
+              key={i}
+              id ={i}
+              query={query}
+      />
     })
    }
-
-        </Row>
-    </Container>
+      </Row>
+  </Container>
 
 {/* home page footer plus sighn for adding new data */}
 
   <footer className='plus__footer'>
-      <Link to="/UpdateNotes"
-      onClick={plusButtonH}
+      <Link to="/UpdateNotes/new"
+      
       type='submit' 
       className='plus__button'
       >

@@ -1,0 +1,40 @@
+/* home page below search bar saved data */
+.bg{
+  background-color: white;
+  border-radius: 5px;
+}
+
+.col1{
+  margin-top: 2%;  
+}
+
+.link{
+  /* text-decoration-line: none;
+  color: black;
+  background-color: aqua;
+  display: contents; */
+  
+}
+
+.row1{
+  
+}
+
+.title{
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.col__3__dots{
+ 
+
+}
+
+.dotButton{
+  border: none;
+  background-color: white;
+}
+
+.dotIcon{
+
+}

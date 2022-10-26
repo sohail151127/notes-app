@@ -1,0 +1,33 @@
+ /* Add lines */
+
+ .main__colll{
+ background-color: white;
+ border-radius: 5px;
+ border: none;
+ }
+
+ .ssRow{
+background-color:white;
+border-radius: 5px;
+border: none;
+ }
+
+.checkBox__col{
+    background-color: white;
+    border-radius: 5px;
+}
+
+.checkBox{    
+    width: 18px;
+    height: 18px;
+    color: lavender;
+}
+
+.content{
+    cursor: pointer;
+}
+
+.amount{
+    cursor: pointer;
+}
+

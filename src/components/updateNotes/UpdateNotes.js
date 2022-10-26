@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, {useEffect } from 'react'
 import { useState } from 'react'
-import { Link } from "react-router-dom";
+import { Link, useParams} from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -10,6 +10,7 @@ import { IoCloseSharp } from 'react-icons/io5';
 import { FiPlus } from 'react-icons/fi';
 import moment from 'moment';
 import Note from "../note/Note.js";
+import {v4 as uuid} from "uuid";
 
 // here i'm getting data from localStorage
 const getlocalAddItem =()=>{
@@ -23,12 +24,20 @@ const getlocalAddItem =()=>{
 }
 
 
-const UpdateNotes = (props) => {  
+const UpdateNotes = ( ) => {  
+  const [noteee, setNoteee] = useState([])
+  const [id, setId] = useState("")
 
-  const [addItem, setAddItem] = useState(
-    getlocalAddItem
-  ) 
- 
+  const noteId = useParams()
+  console.log("useParms_noteId:",noteId)
+
+  const [addItem, setAddItem] = useState([])
+
+  useEffect(() => {
+    setId(uuid())
+  }, [])
+  // console.log(id)
+
   const [note, setNotes] = useState(
     {
       title: "",
@@ -38,14 +47,7 @@ const UpdateNotes = (props) => {
   )
 
   const InputEvent =(e)=>{
-
-    // const value = e.target.value;
-    // const name = e.target.name;
-
-    // above code is normal and the code below is destructured
-
     const {name, value} = e.target;
-
     setNotes((prevData)=>{
       return{
         ...prevData, 
@@ -78,7 +80,6 @@ const UpdateNotes = (props) => {
       return  Number(x.amount)
     })
     let sum = store.reduce((a,b)=>a+b, 0)
-    // ...................................
 
 
     // add data to localStorage
@@ -86,20 +87,30 @@ const UpdateNotes = (props) => {
     localStorage.setItem("lists",JSON.stringify(addItem))
     }, [addItem]);
 
-     // sending data to parent component App.js
-     useEffect(() => {
-      props.receiveUpdateNotesData(addItem)
-     })
-    
+    //add data to unique "key" in localStorage
+    const addKey=()=>{
+      let data1 = JSON.parse(localStorage.getItem("lists"))
+      if (data1.length > 0){
+        let data2 = [{"ID":id},{"DATA":data1}]
+        localStorage.setItem(id,JSON.stringify(data2))
+      }
+      setAddItem([])
+    }
 
-  return (
+    // Getting localStorage data by using its "key" which i got from useParms and named as noteId
+    let data3 = JSON.parse(localStorage.getItem(noteId.id))
+    console.log("localStorageMatchedDataWithNoteId:",data3)
+    
+    
+    return (
     <>
+    
     {/* updateHeader part............. */}
     <Container fluid className='back__arrow1'>
         <Row className='back__arrow2'>  
 
             <Col xs={1} className='back__arrow3'>
-            <Link className='back__arrow3__4' to="/HomePage"><BiArrowBack className='back__arrow4' /></Link>
+            <Link className='back__arrow3__4' to="/" onClick={addKey}><BiArrowBack className='back__arrow4' /></Link>
              </Col>  
 
             <Col xs={11} className='header3'>
@@ -206,7 +217,50 @@ const UpdateNotes = (props) => {
       className='plus__button'>
       <FiPlus className='plus' />
       </button>
-    </footer>    
+    </footer> 
+
+    {/* .......................... */}
+    <Container className='enterData1'>
+        <Row className='enterData2'>
+
+            <Col xs={1} className='checkbox__1'>     
+            <input 
+            type="checkbox" 
+            className='checkbox'  
+            name="" 
+            />
+            </Col>
+
+            <Col xs={6} className='input__text__1'
+            >
+              <textarea onChange={(e)=>{setNoteee({...noteee, "content":e.target.value})}} value={noteee[0]?.content}>
+
+              </textarea>
+              {/* { noteee[0]?.content } */}
+            </Col>
+
+            <Col xs={4} className='input__amount__1'>  
+              <textarea value={noteee[0]?.amount}>
+
+              </textarea>
+              {/* {noteee[0]?.amount} */}
+            </Col>
+            <Col xs={1} className='close__button__1'> 
+              <button 
+              type="submit" 
+              className='close__button'
+              > 
+              <IoCloseSharp className='close__button__background' /> </button>
+            </Col>
+            <Col xs={{ span: 11, offset: 1}} className='date__time__1'>
+            {moment().format('ddd ,D MMMM YY, hh:mm a')}
+            </Col>
+        </Row>
+    </Container>
+    <div>
+      <p>{noteee[0]?.title}</p>
+    </div>
+    
     </>
   )
 }

@@ -14,6 +14,33 @@
     background-color: rgb(197, 112, 8);
 }
 
+/* ....................... */
+
+/* here i took dropdown from navbar */
+/* small arrow removed from below code line */
+.dropdown-toggle::after {
+  display: none !important; 
+}
+
+.header__button__dot{
+  background-color:rgb(197, 112, 8) ;
+  border: none;
+}
+
+.navDrop{
+  width: fit-content;
+}
+
+.navItem{
+  /* width: fit-content; */
+  font-size: medium;
+}
+
+
+
+
+
+/* ............... */
 
 .dots__icon{
     background-color: rgb(197, 112, 8);
@@ -29,6 +56,10 @@
 .dot{
     background-color: rgb(197, 112, 8);
     color: #ffffff;
+    font-size: larger;
+    margin-top: 0%;
+    padding-top: 0%;
+
     
 }
 
@@ -72,37 +103,14 @@
     background-color: white;
     font-size: x-large;
   }
-  
-/* ....................   */
-/* home page below search bar saved data */
 
-
-.box_1_1{
-    justify-content: space-around;
-    
-  }
-
-  .box1{
-    margin-top: 2%;
-  }
-
-  .bg{
-    background-color: white;
-    border-radius: 6px;
-  }
-  .box3{
-    font-weight: bold;
+  /* below search bar */
+  .main__row{
+    /* background-color: blue; */
+    justify-content: space-between;
+    margin: 2%;
   }
   
-  .box5{
-    background-color: white;
-   border: none;
-  }
-  .box6{
-    font-weight: bolder; 
-  }
-
-  /* ..................... */
   /* home page footer css */
   .plus__footer{
     
@@ -124,3 +132,4 @@
 }
 
 /* .................... */
+
