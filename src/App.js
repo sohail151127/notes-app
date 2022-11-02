@@ -13,7 +13,6 @@ const App = () => {
   
   return (
     <>
-{/* sohail"/HomePage" */}
     <Routes>
       <Route exact path="/notes-app" element={<HomePage/>} />
 
