@@ -10,6 +10,8 @@
 background-color:white;
 border-radius: 5px;
 border: none;
+display: flex;
+justify-content: space-around;
  }
 
 .checkBox__col{
@@ -25,9 +27,12 @@ border: none;
 
 .content{
     cursor: pointer;
+    overflow-wrap:break-word
 }
 
 .amount{
     cursor: pointer;
+    overflow-wrap:break-word;
+    /* background-color: aqua !important; */
 }
 

@@ -3,7 +3,6 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { IoCloseSharp } from 'react-icons/io5';
-import moment from 'moment';
 import "./note.css";
 
 const Note = (props) => {
@@ -37,13 +36,16 @@ const Note = (props) => {
             />
             </Col>
 
-            <Col xs={6} className='input__text__1' 
+            <Col xs={8} className='saved__content' 
             style={{textDecoration: line? "line-through" : "none"}}
             >
+              
               { props.content }
+              
+              
             </Col>
 
-            <Col xs={4} className='input__amount__1'>  
+            <Col xs={2} className='input__amount__1'>  
               {props.amount}
             </Col>
             <Col xs={1} className='close__button__1'> 
@@ -54,8 +56,11 @@ const Note = (props) => {
               > 
               <IoCloseSharp className='close__button__background' /> </button>
             </Col>
-            <Col xs={{ span: 11, offset: 1}} className='date__time__1'>
-            {moment().format('ddd ,D MMMM YY, hh:mm a')}
+            <Col className='date__col__saved'>
+              <Row className='date__row__saved'>
+              {props.date}
+              </Row>
+            
             </Col>
         </Row>
     </Container>

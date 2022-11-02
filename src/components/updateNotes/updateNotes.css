@@ -1,128 +1,195 @@
  /* css for updatedHeader  */
 
  .back__arrow1{
-    background-color: rgb(197, 112, 8);
+    z-index: 100;
+    background-color: rgb(245, 112, 8);
+    line-height: 43px;
+    position: fixed;
+    top: 0%;
+    /* top or margin-top m frq h */
 }
 .back__arrow2{
-    background-color: rgb(197, 112, 8);
+    background-color: rgb(245, 112, 8);
 }
 .back__arrow3{
-    background-color: rgb(197, 112, 8);
-    padding-top: 1%;
+    background-color: rgb(245, 112, 8);
 }
 
 .back__arrow3__4{
-    background-color: rgb(197, 112, 8);
+    background-color: rgb(245, 112, 8);
 }
 
 .back__arrow4{
-    background-color: rgb(197, 112, 8);
+    background-color: rgb(245, 112, 8);
     color: #ffffff;
     font-size: x-large;
 }
 
 .header{
-    background-color: rgb(197, 112, 8);
+    background-color: rgb(245, 112, 8);
     color: #ffffff;
     font-weight: 600;
 }
 
 .header__1{
-    background-color: rgb(197, 112, 8);
+    background-color: rgb(245, 112, 8);
 }
 
 .header3{
-    background-color: rgb(197, 112, 8);
-    padding-top: 1%;
+    background-color: rgb(245, 112, 8);
+    /* padding-top: 1%; */
     color: #ffffff;
     font-weight: bold;
 }
 
 .header4{
-    background-color: rgb(197, 112, 8);
+    background-color: rgb(245, 112, 8);
     padding-top: 10%;
 }
 
 .dots__icon{
-    background-color: rgb(197, 112, 8);
+    background-color: rgb(245, 112, 8);
     padding-bottom: 1%;
-    
 }
 
 .dot__background{
-    background-color: rgb(197, 112, 8);
+    background-color: rgb(245, 112, 8);
     font-size: x-large;
     border: none;
-    
 }
 
 .dot{
-    background-color: rgb(197, 112, 8);
+    background-color: rgb(245, 112, 8);
     color: #ffffff;
 }
-
-/* ...................... */
 
 /* enterTitle.css */
 
 .container__title{
-    margin-top: 2%;
+    margin-top: 13%;
     padding: 0%;
+    /* border: 3px solid greenyellow; */
+}
+.container__title:hover{
+    transform: scale(1.03);
+    transition: 0.5s;
+    
+}
+.container__title:active{
+    transform: scale(1.03);
+    transition: 0.5s;
 }
 .row__title{
-    background-color: white;
+    /* border: 5px solid red; */
+    height: 60px;
     margin: 0%;
     padding: 0%;
-    border-radius: 5px;
-    
+    border-radius: 5px;   
+    background-color: white;
 }
 .col__title{
-    background-color: white;
     margin: 0%;
     padding: 0%;
     border-radius: 5px;
-    
-    
+    background-color: white;
 }
 .input__title{
     background-color: white;
     width: 100%;
-    padding: 2% 2%;
+    /* padding: 2% 2%; */
+    padding-top: 15px;
+    padding-left: 14px;
     border: none;
+    outline: none;
+    resize: none;
+    height: 47px;
+    overflow: auto;
     border-radius: 5px;
-    
 }
 
-/* ......................... */
 /* Sum part */
 
 .sum{
     margin-top: 3%; 
 }
-
-/* .................. */
-
-
-/* ................. */
+/* archived button */
+.archived{
+    display: flex;
+    justify-content: center;
+}
+.archivedButton{
+    border: none;
+    background-color: rgb(245, 112, 8);
+    border-radius: 5px;
+    color: white;
+    font-size: small;
+    font-weight: 500;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.archivedButton:hover{
+    background-color: rgb(225, 112, 8); 
+    transform: scale(1.1);  
+}
+.archivedButton:active{
+    background-color: rgb(225, 112, 8);
+    transform: scale(1.1); 
+    transition: 0.1ms;
+}
 /* footer.css */
 
 .plus__footer{
     
     font-size: xx-large;
-    position: absolute;
+    position: fixed;
     bottom: 5%;
     right: 5%;
+    background-color: transparent;
 }
 
 .plus__button{
       border: none;
+      background-color: transparent;
+      transform: scale(1.2);
 }
 
 .plus{
     color: white;
-    background-color: rgb(197, 112, 8);
+    background-color: rgb(245, 112, 8);
     border-radius: 20px;
     padding: 15%;
+    box-shadow: 3px 4px 12px rgb(116, 113, 113);
+}
+.plus:hover{
+    background-color: rgb(225, 112, 8); 
+    transform: scale(1.2);   
+}
+.plus:active{
+    background-color: rgb(225, 112, 8);
+    transition: 0.1ms;
+}
+
+
+.date__col__input{
+    background-color: white;
+    /* border: 2px solid rgb(9, 255, 0); */
+    width: fit-content;
+    font-size: small;
+    margin-left: 4rem;
+}
+.date__row__input{
+    background-color: white;
+    /* margin-left: 5vw; */
+
+    
+    
 }
 
 /* .............. */
+@media screen and (min-width: 760px) {
+    .allBelowUodateNotes{
+        max-width: 782px;        
+    }
+}

@@ -1,17 +1,20 @@
 /* home page header css */
 
-.header{
-    background-color: rgb(197, 112, 8);
+.headerContainer{
+    background-color: rgb(245, 112, 8);
     color: #ffffff;
     font-weight: 600;
+    line-height: 35px;
+   position: fixed;
+   z-index: 100;
 }
 
 .header__1{
-    background-color: rgb(197, 112, 8);
+    background-color: rgb(245, 112, 8);
 }
 
 .header3{
-    background-color: rgb(197, 112, 8);
+    background-color: rgb(245, 112, 8);
 }
 
 /* ....................... */
@@ -23,113 +26,134 @@
 }
 
 .header__button__dot{
-  background-color:rgb(197, 112, 8) ;
+  background-color:rgb(245, 112, 8) ;
   border: none;
 }
 
 .navDrop{
   width: fit-content;
+  background-color: white;
 }
 
 .navItem{
   /* width: fit-content; */
   font-size: medium;
 }
-
-
-
-
-
 /* ............... */
 
 .dots__icon{
-    background-color: rgb(197, 112, 8);
-    
+    background-color: rgb(245, 112, 8);
+    display: flex;
+    justify-content: flex-end; 
 }
 
 .dot__background{
-    background-color: rgb(197, 112, 8);
+    background-color: rgb(245, 112, 8);
     font-size: x-large;
     border: none;
 }
 
 .dot{
-    background-color: rgb(197, 112, 8);
+    background-color: rgb(245, 112, 8);
     color: #ffffff;
     font-size: larger;
     margin-top: 0%;
     padding-top: 0%;
-
-    
 }
-
 /* ....................... */
 /* home page search bar css */
 
+.searchFixedRow{
+  justify-content: center;
+}
+
 .border__searchBar{
     border: 5px solid white;
-    margin-top: 5%;
-    border-radius: 25px;
+    margin-top: 5rem;
+    border-radius: 30px;
     background-color: white;
     padding-left: 0%;
     padding-right: 0%;
-    
   }
-  
   
   .input{
     border: none;
-    width: 80%;
+    outline: none;
+    width: 85%;
     background-color: white;
-    font-size: medium;
+    font-size: 20px;
     margin: 0%;
     padding-top: 2%;
     padding-bottom: 2%;
-    border-radius: 25px;
+    margin-right: 2%;
+    margin-left: 2%;
+    line-height: 5%;
   }
   
   .button{
     color: rgb(138, 132, 132);
     background-color: white;
     border: none;
-    width: 20%;
+    border-radius: 50%;
+    width: 10%;
     padding-top: 1.8%;
     padding-bottom: 1.5%;
-    border-radius: 10px;
-    
   }
   
   .searchIcon__background{
     background-color: white;
     font-size: x-large;
+    border-radius: 50%;
   }
 
   /* below search bar */
+
+  .containerItems{
+    margin-top: 3%;
+  }
+
   .main__row{
-    /* background-color: blue; */
     justify-content: space-between;
     margin: 2%;
   }
+ 
   
   /* home page footer css */
   .plus__footer{
     
     font-size: xx-large;
-    position: absolute;
+    position: fixed;
     bottom: 5%;
     right: 5%;
+    background-color: transparent;
 }
 
 .plus__button{
       border: none;
+      background-color: transparent;
+      transform: scale(1.2);
 }
 
 .plus{
     color: white;
-    background-color: rgb(197, 112, 8);
+    background-color: rgb(260, 112, 8);
     border-radius: 20px;
     padding: 15%;
+    box-shadow: 3px 4px 12px rgb(116, 113, 113);
+}
+.plus:hover{
+  background-color: rgb(225, 112, 8);  
+  transform: scale(1.2); 
+}
+.plus:active{
+  background-color: rgb(225, 112, 8);
+  transition: 0.1ms;
+  transform: scale(1.2);
 }
 
 /* .................... */
-
+@media screen and (min-width: 760px) {
+  .allBelowHomeNote{
+      max-width: 782px;        
+  }
+}

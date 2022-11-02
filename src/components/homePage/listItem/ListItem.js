@@ -23,18 +23,19 @@ const ListItem = (props) => {
   // console.log("ggg",props)
   return (
     <>
+    
           <Col xs={5} className="col1 bg">
             
             <Row className='row1 bg'>
                 <Col xs={8} onClick={()=>navigate(`UpdateNotes/${props.x[0].ID}`)} className="title bg"> 
                     {props.x[1].DATA[0].title} 
                 </Col>
-                <Col xs={{span:3, offset:1}} className="col__3__dots bg"> 
+                <Col xs={4} className="col__3__dots"> 
 
                   <NavDropdown  title={<button 
                                 type="submit" 
                                 className='dotButton'>
-                                <BsThreeDotsVertical className="dotIcon bg" />
+                                <BsThreeDotsVertical className="dotIcon" />
                                 </button>} 
                                 id="basic-nav-dropdown" 
                                 className="navDrop">
@@ -55,6 +56,7 @@ const ListItem = (props) => {
             </Row>
           
         </Col>
+      
     </>
   )
 }

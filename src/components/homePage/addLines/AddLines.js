@@ -35,6 +35,29 @@ useEffect(() => {
 
   // console.log("value of is checked array is:",isChecked)
 
+  // const textArea = document.querySelector("textarea")
+  // textArea.addEventListener("keyup", e=>{
+  //   textArea.style.height = "auto"
+  //   let scHeight = e.target.scrollHeight;
+  //   console.log("jjj:",scHeight)
+  //   textArea.style.height = `${scHeight}px`
+  // })
+
+//   const [textareaheight, setTextareaheight] = useState(1); 
+
+// const textAreaHandler =(event)=>{
+//   console.log( event.target.rows ) 
+//     const height = event.target.scrollHeight; 
+//     const rowHeight = 15; 
+//     const trows = Math.ceil(height / rowHeight) - 1; 
+    
+//     if (trows textareaheight) { 
+      
+//       setTextareaheight(trows); 
+      
+//     } 
+// }
+
   return (
     <>
     {
@@ -58,10 +81,14 @@ useEffect(() => {
                     onClick={()=>Navigate(`UpdateNotes/${props.myData[0].ID}`)} 
                     className="content bg" 
                     style={{textDecoration: isChecked[j]? "line-through" : "none"}}> 
-                          {y.content} 
+    
+                    {y.content} 
+                          
                 </Col>
 
-                <Col xs={4} onClick={()=>Navigate(`UpdateNotes/${props.myData[0].ID}`)} className="amount bg"> {y.amount} </Col>
+                <Col xs={3} onClick={()=>Navigate(`UpdateNotes/${props.myData[0].ID}`)} className="amount bg"> 
+                  {y.amount} 
+                </Col>
         </Row>
         </Col>
       })

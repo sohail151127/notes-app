@@ -4,37 +4,58 @@
   border-radius: 5px;
 }
 
+.row1{
+  display: flex;
+  justify-items: self-end;
+}
+
 .col1{
   margin-top: 2%;  
+  box-shadow: 1px 1px 6px rgb(116, 113, 113);
 }
 
-.link{
-  /* text-decoration-line: none;
-  color: black;
-  background-color: aqua;
-  display: contents; */
-  
+@media only screen and (max-width: 465px) {
+  /* For mobile phones: */
+  .col1{
+    width: 100%;
+  }
 }
 
-.row1{
-  
+.col1:hover{
+  transform: scale(1.05);
+  transition: 0.2s;
+}
+.col1:active{
+  transform: scale(1.05);
+  transition: 0.2s;
 }
 
 .title{
   font-weight: bold;
   cursor: pointer;
+  margin-left: 0;
 }
 
 .col__3__dots{
- 
-
+  display: flex;
+  justify-content: flex-end; 
+  /* width: 20%; */
+  margin-right: 0;
+  background-color: white;
+  border-radius: 5px;
 }
 
 .dotButton{
   border: none;
   background-color: white;
+  margin: 0;
+  padding: 0;
 }
 
 .dotIcon{
+  background-color: white;
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
 
 }

@@ -46,14 +46,15 @@ const HomePage = ( ) => {
 
   return (
     <>
+    <Container fluid className='m-0 p-0'>
 {/* home page header part */}
-    <Container fluid className='header'>
+    <Container fluid className='headerContainer'>
         <Row className='header__1'>        
             <Col xs={4} className='header3'>
                Notes
              </Col>
 
-             <Col xs={{span:4, offset:4}} className='dots__icon'>
+             <Col xs={8} className='dots__icon'>
              
                 <NavDropdown 
                   title={<button className='header__button__dot'><BiDotsVerticalRounded className='dot' /></button>} 
@@ -73,11 +74,12 @@ const HomePage = ( ) => {
         </Row>
     </Container>
 
+<Container className='allBelowHomeNote'>
     {/* home page search bar part */}
 
-    <Container >
-    <Row>        
-        <Col md={12} className="border__searchBar">
+    <Container className='searchFixed'>
+    <Row className='searchFixedRow'>        
+        <Col xs={11} className="border__searchBar">
             
             <input onChange={(e)=>setQuery(e.target.value)} value={query} type="text" placeholder='Search' className='input'/>
 
@@ -87,12 +89,12 @@ const HomePage = ( ) => {
     </Container> 
 
     {/* home page below search bar saved data  */}  
-    <Container fluid>
+    <Container className='containerItems'>
       <Row className="main__row">     
    {
-    data2.filter((a,i)=>a[1].DATA.some(d=>d.title.toLowerCase().includes(query.toLocaleLowerCase())) ||
-    a[1].DATA.some(d=>d.content.toLowerCase().includes(query.toLocaleLowerCase())) ||
-    a[1].DATA.some(d=>d.amount.toLowerCase().includes(query.toLocaleLowerCase()))
+    data2.filter((a,i)=>a[1].DATA.some(d=>d.title?.toLowerCase().includes(query?.toLocaleLowerCase())) ||
+    a[1].DATA.some(d=>d.content?.toLowerCase().includes(query?.toLocaleLowerCase())) ||
+    a[1].DATA.some(d=>d.amount?.toLowerCase().includes(query?.toLocaleLowerCase()))
     ).map((x,i)=>{
       return <ListItem 
               x={x}
@@ -117,7 +119,8 @@ const HomePage = ( ) => {
       </Link>
     </footer>
 {/* ...............................   */}
-
+</Container>
+    </Container>
     </>
   )
 }

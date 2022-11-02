@@ -12,26 +12,30 @@ import moment from 'moment';
 import Note from "../note/Note.js";
 import {v4 as uuid} from "uuid";
 
-// here i'm getting data from localStorage
-const getlocalAddItem =()=>{
-  let list = localStorage.getItem("lists")
 
-  if(list){
-    return JSON.parse(localStorage.getItem("lists")) 
-  } else {
-      return [];
-  }
-}
-
-
-const UpdateNotes = ( ) => {  
-  const [noteee, setNoteee] = useState([])
-  const [id, setId] = useState("")
-
+const UpdateNotes = ( ) => {
   const noteId = useParams()
   console.log("useParms_noteId:",noteId)
 
-  const [addItem, setAddItem] = useState([])
+
+  // here i'm getting data from localStorage
+const getlocalAddItem =( )=>{
+  if (noteId.id !== "new"){
+    console.log("noteId.id !== equal to new")
+    let data3 = JSON.parse(localStorage.getItem(noteId.id))
+    console.log("localStorageMatchedDataWithNoteId:",data3)
+    let data4 = data3[1].DATA
+    return data4    
+
+  } else if (noteId.id === "new"){
+    console.log("noteId.id === equal to new")
+    return []
+  }
+}
+
+  const [id, setId] = useState("")
+  const [addItem, setAddItem] = useState(getlocalAddItem)
+
 
   useEffect(() => {
     setId(uuid())
@@ -52,6 +56,7 @@ const UpdateNotes = ( ) => {
       return{
         ...prevData, 
         [name] : value,
+        date: `${moment().format('ddd ,D MMMM YY, hh:mm a')}`
       } 
     })
   }
@@ -61,7 +66,7 @@ const UpdateNotes = ( ) => {
       return [...prevData, note]
     });
     setNotes({
-      title: "",
+      // title: "",
       content: "",
       amount: ""
     })}
@@ -91,20 +96,22 @@ const UpdateNotes = ( ) => {
     const addKey=()=>{
       let data1 = JSON.parse(localStorage.getItem("lists"))
       if (data1.length > 0){
-        let data2 = [{"ID":id},{"DATA":data1}]
-        localStorage.setItem(id,JSON.stringify(data2))
+        if (noteId.id === "new"){
+          let data2 = [{"ID":id},{"DATA":data1}]
+          localStorage.setItem(id,JSON.stringify(data2))
+        } else if (noteId.id !== "new"){
+          let data5 = [{"ID":noteId.id},{"DATA":data1}]
+          // localStorage.removeItem(noteId.id)
+          localStorage.setItem(noteId.id,JSON.stringify(data5))
+        }
       }
       setAddItem([])
     }
 
-    // Getting localStorage data by using its "key" which i got from useParms and named as noteId
-    let data3 = JSON.parse(localStorage.getItem(noteId.id))
-    console.log("localStorageMatchedDataWithNoteId:",data3)
-    
-    
+
     return (
     <>
-    
+  <Container fluid className='m-0 p-0'>    
     {/* updateHeader part............. */}
     <Container fluid className='back__arrow1'>
         <Row className='back__arrow2'>  
@@ -119,17 +126,19 @@ const UpdateNotes = ( ) => {
         </Row>
     </Container>
 
+    <Container className='allBelowUodateNotes'>
+
     {/* EnterTitle part............. */}
 
     <Container className='container__title'>
         <Row className='row__title'>        
             <Col xs={12} className='col__title'>
-                <input 
+                <textarea 
+                type="textarea" 
                 className='input__title' 
                 placeholder='Enter Title'
                 value={note.title} 
                 onChange={InputEvent} 
-                type="text" 
                 name="title"                 
                 />
              </Col>
@@ -159,6 +168,7 @@ const UpdateNotes = ( ) => {
               title={val.title}
               content={val.content}
               amount={val.amount}
+              date={val.date}
               deleteItem= {onDelete}
             />
       })
@@ -175,21 +185,25 @@ const UpdateNotes = ( ) => {
             <input type="checkbox" className='checkbox' />
             </Col>
 
-            <Col xs={6} className='input__text__1'>
-              <input 
-              type="text" 
+            <Col xs={8} className='input__content'>     
+              <textarea 
+              type="textarea" 
+              className='textArea0' 
               name="content" 
               value={note.content} 
-              onChange={InputEvent} className='textArea' placeholder='Enter Notes' 
+              onChange={InputEvent} 
+              placeholder='Enter Notes' 
               autoComplete='off'
               />
-            </Col>
+              </Col>
 
-            <Col xs={4} className='input__amount__1'>  
+            <Col xs={2} className='input__amount__1'>  
               <input 
               type="number" 
+              className='input__amount' 
               value={note.amount} 
-              onChange={InputEvent} className='input__amount' placeholder='Amount' 
+              onChange={InputEvent} 
+              placeholder='Amount' 
               name="amount" 
               autoComplete='off'
               />
@@ -200,10 +214,20 @@ const UpdateNotes = ( ) => {
               
               className='close__button'> <IoCloseSharp className='close__button__background' /> </button>
             </Col>
-            <Col xs={{ span: 11, offset: 1}} className='date__time__1'>
-            <div className='date__time'> {moment().format('ddd ,D MMMM YY, hh:mm a')} </div>
+            <Col xs={11} className='date__col__input'>
+            <Row className='date__row__input'> 
+                {moment().format('ddd ,D MMMM YY, hh:mm a')} 
+            </Row>
             </Col>
         </Row>
+    </Container>
+
+    <Container className='mt-4'>
+      <Row>
+        <Col className='archived'>
+        <button className='archivedButton'>Show Archived</button>
+        </Col>
+      </Row>
     </Container>
       
     
@@ -218,49 +242,9 @@ const UpdateNotes = ( ) => {
       <FiPlus className='plus' />
       </button>
     </footer> 
+  </Container>
 
-    {/* .......................... */}
-    <Container className='enterData1'>
-        <Row className='enterData2'>
-
-            <Col xs={1} className='checkbox__1'>     
-            <input 
-            type="checkbox" 
-            className='checkbox'  
-            name="" 
-            />
-            </Col>
-
-            <Col xs={6} className='input__text__1'
-            >
-              <textarea onChange={(e)=>{setNoteee({...noteee, "content":e.target.value})}} value={noteee[0]?.content}>
-
-              </textarea>
-              {/* { noteee[0]?.content } */}
-            </Col>
-
-            <Col xs={4} className='input__amount__1'>  
-              <textarea value={noteee[0]?.amount}>
-
-              </textarea>
-              {/* {noteee[0]?.amount} */}
-            </Col>
-            <Col xs={1} className='close__button__1'> 
-              <button 
-              type="submit" 
-              className='close__button'
-              > 
-              <IoCloseSharp className='close__button__background' /> </button>
-            </Col>
-            <Col xs={{ span: 11, offset: 1}} className='date__time__1'>
-            {moment().format('ddd ,D MMMM YY, hh:mm a')}
-            </Col>
-        </Row>
-    </Container>
-    <div>
-      <p>{noteee[0]?.title}</p>
-    </div>
-    
+  </Container>
     </>
   )
 }
