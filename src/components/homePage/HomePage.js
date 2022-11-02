@@ -41,7 +41,7 @@ const HomePage = ( ) => {
 
  const deleteAll=()=>{
   localStorage.clear()
-  navigate("/")
+  navigate("/notes-app")
  }
 
   return (
@@ -110,7 +110,7 @@ const HomePage = ( ) => {
 {/* home page footer plus sighn for adding new data */}
 
   <footer className='plus__footer'>
-      <Link to="/UpdateNotes/new"
+      <Link to="UpdateNotes/new"
       
       type='submit' 
       className='plus__button'

@@ -15,20 +15,20 @@ import {v4 as uuid} from "uuid";
 
 const UpdateNotes = ( ) => {
   const noteId = useParams()
-  console.log("useParms_noteId:",noteId)
+  // console.log("useParms_noteId:",noteId)
 
 
   // here i'm getting data from localStorage
 const getlocalAddItem =( )=>{
   if (noteId.id !== "new"){
-    console.log("noteId.id !== equal to new")
+    // console.log("noteId.id !== equal to new")
     let data3 = JSON.parse(localStorage.getItem(noteId.id))
-    console.log("localStorageMatchedDataWithNoteId:",data3)
+    // console.log("localStorageMatchedDataWithNoteId:",data3)
     let data4 = data3[1].DATA
     return data4    
 
   } else if (noteId.id === "new"){
-    console.log("noteId.id === equal to new")
+    // console.log("noteId.id === equal to new")
     return []
   }
 }

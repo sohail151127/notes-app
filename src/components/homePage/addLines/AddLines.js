@@ -34,29 +34,7 @@ useEffect(() => {
   }, [isChecked]);
 
   // console.log("value of is checked array is:",isChecked)
-
-  // const textArea = document.querySelector("textarea")
-  // textArea.addEventListener("keyup", e=>{
-  //   textArea.style.height = "auto"
-  //   let scHeight = e.target.scrollHeight;
-  //   console.log("jjj:",scHeight)
-  //   textArea.style.height = `${scHeight}px`
   // })
-
-//   const [textareaheight, setTextareaheight] = useState(1); 
-
-// const textAreaHandler =(event)=>{
-//   console.log( event.target.rows ) 
-//     const height = event.target.scrollHeight; 
-//     const rowHeight = 15; 
-//     const trows = Math.ceil(height / rowHeight) - 1; 
-    
-//     if (trows textareaheight) { 
-      
-//       setTextareaheight(trows); 
-      
-//     } 
-// }
 
   return (
     <>
