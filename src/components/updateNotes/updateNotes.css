@@ -108,9 +108,18 @@
 }
 
 /* Sum part */
-
 .sum{
+    /* border: 1px solid red; */
     margin-top: 3%; 
+    display: flex;
+}
+.sum__name__row{
+    /* border: 1px solid blue; */
+    padding-left: 2rem;
+}
+.sum__value__row{
+    /* border: 1px solid greenyellow; */
+    padding-left: 2rem ;
 }
 /* archived button */
 .archived{

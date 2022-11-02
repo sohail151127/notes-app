@@ -147,15 +147,13 @@ const getlocalAddItem =( )=>{
 
     {/* Sum part............. */}
 
-    <Container className='sum'>
-        <Row>        
-            <Col xs={{span:1, offset:0.5}}>
+    <Container className='sum'>   
+            <div xs={2} className="sum__name__row">
                 Sum:
-             </Col>
-             <Col xs={10}>
+             </div>
+             <div xs={9} className="sum__value__row">
                 {sum}
-             </Col>
-        </Row>
+             </div>        
     </Container>
 
 {/* saved data part on update page */}
