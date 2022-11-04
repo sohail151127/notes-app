@@ -29,8 +29,11 @@ const HomePage = ( ) => {
   }
   // console.log("old:",arrayOfKeys)
 
+  // let filteredArrayOfKeys11 = arrayOfKeys.filter(x => x.includes("notesAppKey"))
+  // console.log("hhh:", filteredArrayOfKeys11)
+
   // Now I'm removing "isChecked" key from arrayOfKeys
-  let filteredArrayOfKeys = arrayOfKeys.filter(x => x !== "isChecked")
+  let filteredArrayOfKeys = arrayOfKeys.filter(x => x.includes("notesAppKey"))
   // console.log("new:",filteredArrayOfKeys)
 
   //Corresponding values of each Key from localStorage
@@ -43,6 +46,8 @@ const HomePage = ( ) => {
   localStorage.clear()
   navigate("/notes-app")
  }
+
+ console.log("data2:",data2)
 
   return (
     <>

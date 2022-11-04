@@ -38,7 +38,7 @@ const getlocalAddItem =( )=>{
 
 
   useEffect(() => {
-    setId(uuid())
+    setId(`notesAppKey${uuid()}`)
   }, [])
   // console.log(id)
 
