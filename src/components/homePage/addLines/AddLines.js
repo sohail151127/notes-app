@@ -3,6 +3,7 @@ import { Row } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import { useNavigate } from 'react-router-dom';
 import "../addLines/addLines.css";
+import _ from "lodash";
 
 const AddLines = (props) => {
   const Navigate = useNavigate()
@@ -12,7 +13,8 @@ const getlocalIsChecked =()=>{
   let isChecked = JSON.parse(localStorage.getItem("isChecked"))
 // console.log("isCheckedinfnnn:",isChecked)
   if(isChecked === null){
-    return new Array(props.myData[1].DATA.length).fill(false);
+    // return new Array(props.myData[1].DATA.length).fill(false);
+    return _.fill(new Array(props.myData[1].DATA.length),(false));
   } else {
     return isChecked;
   }
@@ -22,7 +24,7 @@ const getlocalIsChecked =()=>{
   
   const handleOnChange=(position)=>{
     // console.log("position/index:",position)
-    const updatedIsChecked = isChecked.map((x,i)=>{
+    const updatedIsChecked = _.map(isChecked, (x,i)=>{
       return i === position? !x : x
     });
     setIsChecked(updatedIsChecked)
@@ -39,7 +41,7 @@ useEffect(() => {
   return (
     <>
     {
-      props.myData[1].DATA.map((y,j)=>{
+      _.map(props.myData[1].DATA, (y,j)=>{
         return  <Col xs={12} key={j} className="main__colll" >
           <Row className='ssRow'>
                 <Col xs={2} className="checkBox__col"> 

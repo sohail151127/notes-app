@@ -11,6 +11,7 @@ import { FiPlus } from 'react-icons/fi';
 import moment from 'moment';
 import Note from "../note/Note.js";
 import {v4 as uuid} from "uuid";
+import _ from "lodash";
 
 
 const UpdateNotes = ( ) => {
@@ -71,9 +72,17 @@ const getlocalAddItem =( )=>{
       amount: ""
     })}
 
+    // const onDelete =(id)=>{
+    //   setAddItem((oldData)=>{
+    //     return oldData.filter((i,j)=>{
+    //       return j !== id;  
+    //     })
+    //   }
+    //     )         
+    // }
     const onDelete =(id)=>{
       setAddItem((oldData)=>{
-        return oldData.filter((i,j)=>{
+        return _.filter(oldData, (i,j)=>{
           return j !== id;  
         })
       }
@@ -81,7 +90,12 @@ const getlocalAddItem =( )=>{
     }
 
     // sum part.........................
-    let store= addItem.map((x, i)=>{
+    // let store= addItem.map((x, i)=>{
+    //   return  Number(x.amount)
+    // })
+    // let sum = store.reduce((a,b)=>a+b, 0)
+
+    let store= _.map(addItem, (x, i)=>{
       return  Number(x.amount)
     })
     let sum = store.reduce((a,b)=>a+b, 0)
@@ -92,9 +106,13 @@ const getlocalAddItem =( )=>{
     localStorage.setItem("lists",JSON.stringify(addItem))
     }, [addItem]);
 
+    let data1 = JSON.parse(localStorage.getItem("lists"))
+      console.log("jjj:",data1)
+
     //add data to unique "key" in localStorage
     const addKey=()=>{
       let data1 = JSON.parse(localStorage.getItem("lists"))
+      // console.log("jjj:",data1)
       if (data1.length > 0){
         if (noteId.id === "new"){
           let data2 = [{"ID":id},{"DATA":data1}]
@@ -158,7 +176,7 @@ const getlocalAddItem =( )=>{
 
 {/* saved data part on update page */}
     {
-      addItem.map((val, index)=>{
+      _.map(addItem, (val, index)=>{
         
         return <Note 
               key={index}

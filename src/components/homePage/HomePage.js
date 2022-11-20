@@ -12,6 +12,7 @@ import { FiPlus } from 'react-icons/fi';
 import ListItem from './listItem/ListItem';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import "bootstrap/dist/css/bootstrap.min.css";
+import _ from 'lodash';
 
 const HomePage = ( ) => {
   const navigate=useNavigate()
@@ -25,19 +26,23 @@ const HomePage = ( ) => {
     for (var i=0; i< localStorage.length; i++) {
       var key = localStorage.key(i);
       // var value = localStorage[key];
-      arrayOfKeys.push(key)
+      // arrayOfKeys.push(key)    i'm replacing with lodash fn...
+      arrayOfKeys = _.concat(arrayOfKeys, key)
   }
   // console.log("old:",arrayOfKeys)
 
-  // let filteredArrayOfKeys11 = arrayOfKeys.filter(x => x.includes("notesAppKey"))
-  // console.log("hhh:", filteredArrayOfKeys11)
+
 
   // Now I'm removing "isChecked" key from arrayOfKeys
-  let filteredArrayOfKeys = arrayOfKeys.filter(x => x.includes("notesAppKey"))
+  // let filteredArrayOfKeys = arrayOfKeys.filter(x => x.includes("notesAppKey"))
+  let filteredArrayOfKeys = _.filter(arrayOfKeys, (x)=>_.includes(x, "notesAppKey"))
   // console.log("new:",filteredArrayOfKeys)
 
   //Corresponding values of each Key from localStorage
-  let data2 = filteredArrayOfKeys.map((x)=>{
+  // let data2 = filteredArrayOfKeys.map((x)=>{
+  //   return (JSON.parse(localStorage.getItem(x)))
+  // })
+  let data2 = _.map(filteredArrayOfKeys, (x)=>{
     return (JSON.parse(localStorage.getItem(x)))
   })
   // console.log("keyValues",data2)
@@ -47,7 +52,7 @@ const HomePage = ( ) => {
   navigate("/notes-app")
  }
 
- console.log("data2:",data2)
+//  console.log("data2:",data2)
 
   return (
     <>
@@ -96,11 +101,25 @@ const HomePage = ( ) => {
     {/* home page below search bar saved data  */}  
     <Container className='containerItems'>
       <Row className="main__row">     
-   {
+   {/* {
     data2.filter((a,i)=>a[1].DATA.some(d=>d.title?.toLowerCase().includes(query?.toLocaleLowerCase())) ||
     a[1].DATA.some(d=>d.content?.toLowerCase().includes(query?.toLocaleLowerCase())) ||
     a[1].DATA.some(d=>d.amount?.toLowerCase().includes(query?.toLocaleLowerCase()))
     ).map((x,i)=>{
+      return <ListItem 
+              x={x}
+              key={i}
+              id ={i}
+              query={query}
+      />
+    })
+   } */}
+
+{
+    _.map( _.filter(data2, (a,i)=>a[1].DATA.some(d=>d.title?.toLowerCase().includes(query?.toLocaleLowerCase())) ||
+    a[1].DATA.some(d=>d.content?.toLowerCase().includes(query?.toLocaleLowerCase())) ||
+    a[1].DATA.some(d=>d.amount?.toLowerCase().includes(query?.toLocaleLowerCase()))
+    ) , (x,i)=>{
       return <ListItem 
               x={x}
               key={i}
