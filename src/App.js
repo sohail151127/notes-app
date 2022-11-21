@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import UpdateNotes from './components/updateNotes/UpdateNotes';
 import HomePage from './components/homePage/HomePage';
 
-import "./app.css";
+// import "./app.css";
 import {
   Routes,
   Route,
