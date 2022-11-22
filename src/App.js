@@ -14,7 +14,7 @@ const App = () => {
   return (
     <>
     <Routes>
-      <Route exact path="/notes-app" element={<HomePage/>} />
+      <Route exact path="/" element={<HomePage/>} />
 
       <Route path="/notes-app/UpdateNotes/:id" element={<UpdateNotes/>} />
     </Routes>
