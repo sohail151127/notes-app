@@ -17,7 +17,7 @@ const ListItem = (props) => {
   const deleteThisNote=(e)=>{
    let boxId = e.currentTarget.id
    localStorage.removeItem(boxId)
-    navigate("/notes-app");
+    navigate("/");
   }
   
   let myData = props.x

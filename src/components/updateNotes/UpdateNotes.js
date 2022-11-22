@@ -135,7 +135,7 @@ const getlocalAddItem =( )=>{
         <Row className='back__arrow2'>  
 
             <Col xs={1} className='back__arrow3'>
-            <Link className='back__arrow3__4' to="/notes-app" onClick={addKey}><BiArrowBack className='back__arrow4' /></Link>
+            <Link className='back__arrow3__4' to="/" onClick={addKey}><BiArrowBack className='back__arrow4' /></Link>
              </Col>  
 
             <Col xs={11} className='header3'>

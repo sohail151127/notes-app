@@ -49,7 +49,7 @@ const HomePage = ( ) => {
 
  const deleteAll=()=>{
   localStorage.clear()
-  navigate("/notes-app")
+  navigate("/")
  }
 
 //  console.log("data2:",data2)
