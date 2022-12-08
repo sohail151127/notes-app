@@ -29,7 +29,7 @@ const ListItem = (props) => {
             
             <Row className='row1 bg'>
                 <Col xs={8} onClick={()=>navigate(`UpdateNotes/${props.x[0].ID}`)} className="title bg"> 
-                    {props.x[1].DATA[0].title} 
+                    {props.x[2]?.title} 
                 </Col>
                 <Col xs={4} className="col__3__dots"> 
 

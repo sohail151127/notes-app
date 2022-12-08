@@ -41,7 +41,7 @@ useEffect(() => {
   return (
     <>
     {
-      _.map(props.myData[1].DATA, (y,j)=>{
+      _.map(props.myData[1]?.DATA, (y,j)=>{
         return  <Col xs={12} key={j} className="main__colll" >
           <Row className='ssRow'>
                 <Col xs={2} className="checkBox__col"> 
