@@ -48,6 +48,13 @@ const ListItem = (props) => {
                             Delete this note
                         </NavDropdown.Item>
 
+                        <NavDropdown.Item
+                            onClick={()=>navigate(`UpdateNotes/${myData[0].ID}`)}
+                            id={props.x[0].ID} 
+                            className='navItem'>
+                            Edit this note
+                        </NavDropdown.Item>
+
                   </NavDropdown>
                 </Col>
         {/* iterate from here for new checkbox lines */}

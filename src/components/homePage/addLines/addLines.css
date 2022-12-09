@@ -17,17 +17,20 @@ border-radius: 5px;
 border: none;
 display: flex;
 justify-content: space-around;
+cursor: pointer;
  }
 
 .checkBox__col{
     background-color: white;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .checkBox{    
     width: 18px;
     height: 18px;
     color: lavender;
+    cursor: pointer;
 }
 
 .content{
