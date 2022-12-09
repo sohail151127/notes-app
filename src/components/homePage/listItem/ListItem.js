@@ -17,7 +17,7 @@ const ListItem = (props) => {
   const deleteThisNote=(e)=>{
    let boxId = e.currentTarget.id
    localStorage.removeItem(boxId)
-    navigate("/notes-app");
+    navigate("/");
   }
   
   let myData = props.x
@@ -29,7 +29,7 @@ const ListItem = (props) => {
             
             <Row className='row1 bg'>
                 <Col xs={8} onClick={()=>navigate(`UpdateNotes/${props.x[0].ID}`)} className="title bg"> 
-                    {props.x[1].DATA[0].title} 
+                    {props.x[2]?.title} 
                 </Col>
                 <Col xs={4} className="col__3__dots"> 
 
@@ -46,6 +46,13 @@ const ListItem = (props) => {
                             id={props.x[0].ID} 
                             className='navItem'>
                             Delete this note
+                        </NavDropdown.Item>
+
+                        <NavDropdown.Item
+                            onClick={()=>navigate(`UpdateNotes/${myData[0].ID}`)}
+                            id={props.x[0].ID} 
+                            className='navItem'>
+                            Edit this note
                         </NavDropdown.Item>
 
                   </NavDropdown>

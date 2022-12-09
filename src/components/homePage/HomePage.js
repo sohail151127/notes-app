@@ -49,7 +49,7 @@ const HomePage = ( ) => {
 
  const deleteAll=()=>{
   localStorage.clear()
-  navigate("/notes-app")
+  navigate("/")
  }
 
 //  console.log("data2:",data2)
@@ -116,7 +116,7 @@ const HomePage = ( ) => {
    } */}
 
 {
-    _.map( _.filter(data2, (a,i)=>a[1].DATA.some(d=>d.title?.toLowerCase().includes(query?.toLocaleLowerCase())) ||
+    _.map( _.filter(data2, (a,i)=>a[2]?.title?.toLowerCase().includes(query?.toLocaleLowerCase()) ||
     a[1].DATA.some(d=>d.content?.toLowerCase().includes(query?.toLocaleLowerCase())) ||
     a[1].DATA.some(d=>d.amount?.toLowerCase().includes(query?.toLocaleLowerCase()))
     ) , (x,i)=>{

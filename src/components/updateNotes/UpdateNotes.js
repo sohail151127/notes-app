@@ -9,34 +9,60 @@ import "./updateNotes.css";
 import { IoCloseSharp } from 'react-icons/io5';
 import { FiPlus } from 'react-icons/fi';
 import moment from 'moment';
-import Note from "../note/Note.js";
+// import Note from "../note/Note.js";
+import "../note/note.css";
 import {v4 as uuid} from "uuid";
 import _ from "lodash";
 
 
 const UpdateNotes = ( ) => {
   const noteId = useParams()
-  // console.log("useParms_noteId:",noteId)
-
 
   // here i'm getting data from localStorage
 const getlocalAddItem =( )=>{
   if (noteId.id !== "new"){
-    // console.log("noteId.id !== equal to new")
     let data3 = JSON.parse(localStorage.getItem(noteId.id))
     // console.log("localStorageMatchedDataWithNoteId:",data3)
-    let data4 = data3[1].DATA
+    let data4 = data3[1].DATA.filter((x,i)=>!x.isChecked)
     return data4    
 
   } else if (noteId.id === "new"){
-    // console.log("noteId.id === equal to new")
+    return []
+  }
+}
+
+  // here i'm getting data from localStorage
+  const getlocalArchiveData =( )=>{
+    if (noteId.id !== "new"){
+      let data3 = JSON.parse(localStorage.getItem(noteId.id))
+      // console.log("localStorageMatchedDataWithNoteId:",data3)
+      let data4 = data3[1].DATA.filter((x,i)=>x.isChecked)
+
+      return data4    
+  
+    } else if (noteId.id === "new"){
+      return []
+    }
+  }
+
+//geting old title if any
+const getDataForTitle =( )=>{
+  if (noteId.id !== "new"){
+    let data3 = JSON.parse(localStorage.getItem(noteId.id))
+    let data4 = data3[2]?.title
+    return data4    
+
+  } else if (noteId.id === "new"){
     return []
   }
 }
 
   const [id, setId] = useState("")
   const [addItem, setAddItem] = useState(getlocalAddItem)
-
+  const [title, setTitle] = useState(getDataForTitle)
+  const [archiveNotes, setArchiveNotes] = useState(getlocalArchiveData)
+  const [toggleState, setToggleState] = useState(false)
+  const [showDataInButton, setShowDataInButton] = useState("Show Archived")
 
   useEffect(() => {
     setId(`notesAppKey${uuid()}`)
@@ -45,11 +71,15 @@ const getlocalAddItem =( )=>{
 
   const [note, setNotes] = useState(
     {
-      title: "",
+      // title: "",
       content: "",
       amount: ""
     }
   )
+
+  const InputTitle =(e)=>{
+    setTitle(e.target.value)
+  }
 
   const InputEvent =(e)=>{
     const {name, value} = e.target;
@@ -62,70 +92,150 @@ const getlocalAddItem =( )=>{
     })
   }
 
+  //adding new note
   const addEvent =()=>{
     setAddItem((prevData)=>{
       return [...prevData, note]
     });
     setNotes({
-      // title: "",
       content: "",
       amount: ""
-    })}
+    })
+  }
 
-    // const onDelete =(id)=>{
-    //   setAddItem((oldData)=>{
-    //     return oldData.filter((i,j)=>{
-    //       return j !== id;  
-    //     })
-    //   }
-    //     )         
-    // }
+    //deleting note
     const onDelete =(id)=>{
-      setAddItem((oldData)=>{
-        return _.filter(oldData, (i,j)=>{
-          return j !== id;  
-        })
-      }
-        )         
+      let a = window.confirm("Are you sure?")
+      if(a){
+                setAddItem((prevData)=>{
+                  return _.filter(prevData, (i,j)=>{
+                    return j !== id;  
+                  })
+                }
+                  ) 
+      }else{
+        return;
+      }         
+    }
+
+
+    const onArchiveDelete =(id)=>{
+      let a = window.confirm("Are you sure?")
+      if(a){
+                setArchiveNotes((prevData)=>{
+                  return _.filter(prevData, (i,j)=>{
+                    return j !== id;  
+                  })
+                }
+                  ) 
+      }else{
+        return;
+      }         
     }
 
     // sum part.........................
-    // let store= addItem.map((x, i)=>{
-    //   return  Number(x.amount)
-    // })
-    // let sum = store.reduce((a,b)=>a+b, 0)
-
     let store= _.map(addItem, (x, i)=>{
       return  Number(x.amount)
     })
     let sum = store.reduce((a,b)=>a+b, 0)
 
-
-    // add data to localStorage
-    useEffect(() => {
-    localStorage.setItem("lists",JSON.stringify(addItem))
-    }, [addItem]);
-
-    let data1 = JSON.parse(localStorage.getItem("lists"))
-      console.log("jjj:",data1)
+    //updating notes
+    const savedContentChange =(e,index)=>{
+      const name = e.target.name;
+      const value = e.target.value;
+      setAddItem((prevData)=>{
+        // console.log("prevData:", prevData)
+        const updatedPrevData = prevData.map((pData,i)=>(
+          i===index?
+          {
+            ...pData, 
+            [name]: value,
+          
+        } : {...pData}));
+        return [...updatedPrevData]
+      });
+    }
 
     //add data to unique "key" in localStorage
     const addKey=()=>{
-      let data1 = JSON.parse(localStorage.getItem("lists"))
-      // console.log("jjj:",data1)
+      let data1 = _.concat(addItem, archiveNotes)
+
       if (data1.length > 0){
         if (noteId.id === "new"){
-          let data2 = [{"ID":id},{"DATA":data1}]
-          localStorage.setItem(id,JSON.stringify(data2))
+          if(title?.length > 0){
+            let data2 = [{"ID":id}, {"DATA":data1},{title:title}]
+            localStorage.setItem(id,JSON.stringify(data2))
+          }else{
+            let data2 = [{"ID":id},{"DATA":data1}]
+            localStorage.setItem(id,JSON.stringify(data2))
+          }
         } else if (noteId.id !== "new"){
-          let data5 = [{"ID":noteId.id},{"DATA":data1}]
-          // localStorage.removeItem(noteId.id)
-          localStorage.setItem(noteId.id,JSON.stringify(data5))
+            if(title?.length > 0){
+              let data5 = [{"ID":noteId.id}, {"DATA":data1},{title:title}]
+              localStorage.setItem(noteId.id,JSON.stringify(data5))
+            }else{
+              let data5 = [{"ID":noteId.id},{"DATA":data1}]
+              // localStorage.removeItem(noteId.id)
+              localStorage.setItem(noteId.id,JSON.stringify(data5))
+            }
         }
+      }else if(data1.length === 0 && noteId.id === "new" && title?.length > 0){
+          let data2 = [{"ID":id}, {"DATA":[]},{title:title}]
+          localStorage.setItem(id,JSON.stringify(data2))
+      }else{
+        return;
       }
       setAddItem([])
     }
 
+    //handling checkboxes
+    const handleCheckboxes =(e,index)=>{
+
+      // console.log("event:",e)
+      // console.log("index:",index)
+      // setCheckBox(e.target.value)
+
+      const updatedNotes = addItem?.filter((x,i)=> i !== index)
+
+        setAddItem(updatedNotes);
+
+        setArchiveNotes(prevData => {
+          return _.flattenDeep([...prevData, addItem?.filter((y,j)=>j === index).map(v => ({...v, isChecked: true}))])
+        }
+          )
+    }
+
+    // console.log("addItem:",addItem)
+    // console.log("archiveNotes:",archiveNotes)
+
+    //handling Archivedcheckboxes
+    localStorage.setItem("archiveNotes",JSON.stringify(archiveNotes))
+    const handleUnArchivedCheckboxes =(e,index)=>{
+      // console.log("event:",e)
+      // console.log("index:",index)
+      // setCheckBox(e.target.value)
+      const updateArchiveNotes = archiveNotes.filter((x,i)=> i !== index)
+        setArchiveNotes(updateArchiveNotes);
+        setAddItem(prevData => {
+          return _.flattenDeep([...prevData, JSON.parse(localStorage.getItem("archiveNotes")).filter((y,j)=>j === index).map(({content, amount, date}) => ({content, amount, date}))])
+        }
+          )
+    }
+     // Archive notes sum part.........................
+     let save= _.map(archiveNotes, (x, i)=>{
+      return  Number(x.amount)
+    })
+    let archiveSum = save.reduce((a,b)=>a+b, 0)
+
+    // toggle Button (Show Archived / Hide Archived)
+    const toggleButton =()=>{
+      setToggleState(!toggleState)
+      if(toggleState === true){
+        setShowDataInButton("Show Archived")
+      }else{
+        setShowDataInButton("Hide Archived")
+      }
+    }
 
     return (
     <>
@@ -135,7 +245,7 @@ const getlocalAddItem =( )=>{
         <Row className='back__arrow2'>  
 
             <Col xs={1} className='back__arrow3'>
-            <Link className='back__arrow3__4' to="/notes-app" onClick={addKey}><BiArrowBack className='back__arrow4' /></Link>
+            <Link className='back__arrow3__4' to="/" onClick={addKey}><BiArrowBack className='back__arrow4' /></Link>
              </Col>  
 
             <Col xs={11} className='header3'>
@@ -155,8 +265,8 @@ const getlocalAddItem =( )=>{
                 type="textarea" 
                 className='input__title' 
                 placeholder='Enter Title'
-                value={note.title} 
-                onChange={InputEvent} 
+                value={title} 
+                onChange={InputTitle} 
                 name="title"                 
                 />
              </Col>
@@ -175,7 +285,7 @@ const getlocalAddItem =( )=>{
     </Container>
 
 {/* saved data part on update page */}
-    {
+    {/* {
       _.map(addItem, (val, index)=>{
         
         return <Note 
@@ -188,6 +298,55 @@ const getlocalAddItem =( )=>{
               deleteItem= {onDelete}
             />
       })
+    } */}
+
+
+    {
+    _.map(addItem, (val, index)=>{
+      return <Container className='enterData1' key={index}>
+      <Row className='enterData2'>
+      
+          <Col xs={1} className='checkbox__1'>     
+          <input checked={false} type="checkbox" onChange={(e)=>handleCheckboxes(e,index)} className='checkbox' />
+          </Col>
+
+          <Col xs={8} className='input__content'>     
+            <textarea 
+            type="textarea" 
+            className='textArea0' 
+            name="content" 
+            value={val.content} 
+            onChange={(e)=>savedContentChange(e,index)}
+            placeholder='Enter Notes' 
+            autoComplete='off'
+            />
+            </Col>
+
+          <Col xs={2} className='input__amount__1'>  
+            <input 
+            type="number" 
+            className='input__amount' 
+            value={val.amount} 
+            onChange={(e)=>savedContentChange(e,index)}
+            placeholder='Amount' 
+            name="amount" 
+            autoComplete='off'
+            />
+          </Col>
+
+          <Col xs={1} className='close__button__1'> 
+            <button type="submit" 
+            
+            className='close__button' onClick={()=>onDelete(index)}> <IoCloseSharp className='close__button__background' /> </button>
+          </Col>
+          <Col xs={11} className='date__col__input'>
+          <Row className='date__row__input'> 
+              {moment().format('ddd ,D MMMM YY, hh:mm a')} 
+          </Row>
+          </Col>
+      </Row>
+  </Container>
+    })
     }
       
     
@@ -228,7 +387,7 @@ const getlocalAddItem =( )=>{
             <Col xs={1} className='close__button__1'> 
               <button type="submit" 
               
-              className='close__button'> <IoCloseSharp className='close__button__background' /> </button>
+              className='close__button' > <IoCloseSharp className='close__button__background' /> </button>
             </Col>
             <Col xs={11} className='date__col__input'>
             <Row className='date__row__input'> 
@@ -238,13 +397,86 @@ const getlocalAddItem =( )=>{
         </Row>
     </Container>
 
+
+    {/*   show/hide archive button */}
     <Container className='mt-4'>
       <Row>
         <Col className='archived'>
-        <button className='archivedButton'>Show Archived</button>
+        <button onClick={toggleButton} className='archivedButton'>{showDataInButton}</button>
         </Col>
       </Row>
     </Container>
+
+{/* ....................................... */}
+    
+    { 
+     toggleState?
+      <div>
+ {/* Archive Sum part............. */}
+
+ <Container className='sum'>   
+            <div xs={2} className="sum__name__row">
+                Sum:
+             </div>
+             <div xs={9} className="sum__value__row">
+                {archiveSum}
+             </div>        
+    </Container>
+
+
+    {/* archived data */}
+    {
+    _.map(archiveNotes, (val, index)=>{
+      return <Container className='enterData1' key={index}>
+      <Row className='enterData2'>
+      
+          <Col xs={1} className='checkbox__1'>     
+          <input checked type="checkbox" onChange={(e)=>handleUnArchivedCheckboxes(e,index)} className='checkbox' />
+          </Col>
+
+          <Col xs={8} className='input__content' >     
+            <textarea 
+            style={{textDecoration: 'line-through'}}
+            type="textarea" 
+            className='textArea0' 
+            name="content" 
+            value={val.content} 
+            onChange={(e)=>savedContentChange(e,index)}
+            placeholder='Enter Notes' 
+            autoComplete='off'
+            />
+            </Col>
+
+          <Col xs={2} className='input__amount__1'>  
+            <input 
+            style={{textDecoration: 'line-through'}}
+            type="number" 
+            className='input__amount' 
+            value={val.amount} 
+            onChange={(e)=>savedContentChange(e,index)}
+            placeholder='Amount' 
+            name="amount" 
+            autoComplete='off'
+            />
+          </Col>
+
+          <Col xs={1} className='close__button__1'> 
+            <button type="submit" 
+            
+            className='close__button' onClick={()=>onArchiveDelete(index)}> <IoCloseSharp className='close__button__background' /> </button>
+          </Col>
+          <Col xs={11} className='date__col__input'>
+          <Row className='date__row__input'> 
+              {moment().format('ddd ,D MMMM YY, hh:mm a')} 
+          </Row>
+          </Col>
+      </Row>
+  </Container>
+    })
+    }
+    </div>: <div></div>
+    }
+
       
     
 
